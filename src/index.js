@@ -39,10 +39,16 @@ function init() {
       return;
     }
 
-    const dataURL = dataEl.getAttribute(dataAttr);
+    let dataURL = dataEl.getAttribute(dataAttr);
 
     if (!dataURL) {
       return;
+    }
+
+    const portraitDataURL = dataEl.getAttribute(`${dataAttr}-portrait`);
+
+    if (portraitDataURL && window.innerWidth <= window.innerHeight) {
+      dataURL = portraitDataURL;
     }
 
     markerEl.parentElement.parentElement.removeChild(markerEl.parentElement);
