@@ -1,0 +1,24 @@
+{
+  "name": "odyssey-scrubby",
+  "version": "1.0.0-pre",
+  "description": "Enhance Odyssey block video backgrounds with scroll-based scrubbable video frames.",
+  "license": "MIT",
+  "private": true,
+  "contributors": [
+    "Colin Gourlay <gourlay.colin@abc.net.au>"
+  ],
+  "aunty": {
+    "type": "basic"
+  },
+  "scripts": {
+    "start": "aunty serve"
+  },
+  "devDependencies": {
+    "@abcnews/aunty": "^10.5.2"
+  },
+  "dependencies": {
+    "@abcnews/alternating-case-to-object": "^2.0.0",
+    "lottie-web": "^5.5.10",
+    "simple-linear-scale": "^1.0.1"
+  }
+}
