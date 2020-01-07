@@ -45,6 +45,8 @@ function init() {
       return;
     }
 
+    markerEl.parentElement.parentElement.removeChild(markerEl.parentElement);
+
     configs.push({
       rootEl,
       props: {
