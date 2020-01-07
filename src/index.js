@@ -11,50 +11,58 @@ function render() {
   });
 }
 
-[...document.querySelectorAll(`a[name^="scrubby"]`)].forEach(markerEl => {
-  const blockEl = markerEl.closest(".Block");
+function init() {
+  [...document.querySelectorAll(`a[name^="scrubby"]`)].forEach(markerEl => {
+    const blockEl = markerEl.closest(".Block");
 
-  if (!blockEl) {
-    return;
-  }
-
-  const rootEl = blockEl.querySelector(".Block-media");
-
-  if (!rootEl) {
-    return;
-  }
-
-  const { id, start, end } = acto(markerEl.getAttribute("name").slice(7));
-
-  if (!id) {
-    return;
-  }
-
-  const dataAttr = `data-odyssey-scrubby-${id}`;
-
-  const dataEl = document.querySelector(`[${dataAttr}]`);
-
-  if (!dataEl) {
-    return;
-  }
-
-  const dataURL = dataEl.getAttribute(dataAttr);
-
-  if (!dataURL) {
-    return;
-  }
-
-  configs.push({
-    rootEl,
-    props: {
-      dataURL,
-      startVH: start || 0,
-      endVH: end || 0
+    if (!blockEl) {
+      return;
     }
-  });
-});
 
-render();
+    const rootEl = blockEl.querySelector(".Block-media");
+
+    if (!rootEl) {
+      return;
+    }
+
+    const { id, start, end } = acto(markerEl.getAttribute("name").slice(7));
+
+    if (!id) {
+      return;
+    }
+
+    const dataAttr = `data-odyssey-scrubby-${id}`;
+
+    const dataEl = document.querySelector(`[${dataAttr}]`);
+
+    if (!dataEl) {
+      return;
+    }
+
+    const dataURL = dataEl.getAttribute(dataAttr);
+
+    if (!dataURL) {
+      return;
+    }
+
+    configs.push({
+      rootEl,
+      props: {
+        dataURL,
+        startVH: start || 0,
+        endVH: end || 0
+      }
+    });
+  });
+
+  render();
+}
+
+if (window.__ODYSSEY__) {
+  init();
+} else {
+  window.addEventListener("odyssey:api", init);
+}
 
 if (module.hot) {
   module.hot.accept("./components/App", () => {
