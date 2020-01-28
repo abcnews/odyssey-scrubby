@@ -47,7 +47,7 @@ function init() {
 
     const portraitDataURL = dataEl.getAttribute(`${dataAttr}-portrait`);
 
-    if (portraitDataURL && window.innerWidth <= window.innerHeight) {
+    if (portraitDataURL && window.innerWidth / window.innerHeight <= 0.75) {
       dataURL = portraitDataURL;
     }
 
