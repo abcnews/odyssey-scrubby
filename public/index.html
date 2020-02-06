@@ -3,10 +3,70 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>odyssey-scrubby</title>
+    <title>[odyssey-scrubby] Example</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .Block {
+        overflow: hidden;
+        position: relative;
+        margin-top: 0;
+        min-height: 100vh;
+      }
+      .Block[data-viewports-tall="2"] {
+        min-height: 200vh;
+      }
+      .Block[data-viewports-tall="4"] {
+        min-height: 400vh;
+      }
+      .Block[data-viewports-tall="8"] {
+        min-height: 800vh;
+      }
+      .Block-media {
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+      }
+      .Block-media.is-fixed {
+        clip: rect(0, auto, auto, 0);
+        -webkit-clip-path: inset(0 0 0 0);
+        max-height: none;
+      }
+      .Block-media.is-fixed > * {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+      }
+      .Block-media.is-fixed > * _::-webkit-full-page-media,
+      .Block-media.is-fixed > * _:future,
+      :root .Block-media.is-fixed > * {
+        -webkit-transform: translateZ(0);
+      }
+    </style>
   </head>
   <body>
-    <div data-odyssey-scrubby-root></div>
+    <div class="Block" data-viewports-tall="4">
+      <div class="Block-media is-fixed">
+        <div></div>
+      </div>
+      <div>
+        <a name="scrubbyIDexample"> </a>
+      </div>
+    </div>
+    <div
+      data-odyssey-scrubby-example="example/landscape/data.json"
+      data-odyssey-scrubby-example-portrait="example/portrait/data.json"
+    ></div>
+    <script>
+      window.__ODYSSEY__ = true;
+    </script>
     <script src="index.js"></script>
   </body>
 </html>
