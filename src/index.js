@@ -72,10 +72,25 @@ function init() {
   render();
 }
 
-if (window.__ODYSSEY__) {
+function initAfterOtherOdysseyPlugins() {
+  if (
+    Array.from(document.querySelectorAll(".init-interactive")).filter(x =>
+      x.getAttribute("data-scripts").match(/odyssey-/)
+    ).length
+  ) {
+    // Give other Odyssey plugins a couple of seconds to initialise,
+    // because [odyssey-scrubby] has the potential to massively delay
+    // their asset loading, due to the sheer number of images we request
+    return setTimeout(init, 2000);
+  }
+
   init();
+}
+
+if (window.__ODYSSEY__) {
+  initAfterOtherOdysseyPlugins();
 } else {
-  window.addEventListener("odyssey:api", init);
+  window.addEventListener("odyssey:api", initAfterOtherOdysseyPlugins);
 }
 
 if (module.hot) {
