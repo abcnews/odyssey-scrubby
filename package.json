@@ -1,6 +1,6 @@
 {
 	"name": "odyssey-scrubby",
-	"version": "1.3.0",
+	"version": "1.3.1",
 	"description": "Enhance Odyssey block video backgrounds with scroll-based scrubbable video frames.",
 	"license": "MIT",
 	"private": true,
