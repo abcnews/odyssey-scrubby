@@ -65,7 +65,33 @@
       data-odyssey-scrubby-example-portrait="example/portrait/data.json"
     ></div>
     <script>
-      window.__ODYSSEY__ = true;
+      var subscribedFn;
+
+      window.__ODYSSEY__ = {
+        scheduler: {
+          enqueue: function(fn) {
+            fn();
+          },
+          subscribe: function(fn) {
+            subscribedFn = fn;
+          },
+          unsubscribe: function() {
+            subscribedFn = null;
+          }
+        }
+      };
+
+      window.addEventListener("resize", function() {
+        if (subscribedFn) {
+          subscribedFn({ hasChanged: true });
+        }
+      });
+
+      window.addEventListener("scroll", function() {
+        if (subscribedFn) {
+          subscribedFn({ hasChanged: false });
+        }
+      });
     </script>
     <script src="index.js"></script>
   </body>

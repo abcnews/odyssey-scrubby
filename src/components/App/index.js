@@ -32,7 +32,7 @@ export default function App({ dataURL, startVH, endVH } = {}) {
   let progressScale;
   let unclampedProgressScale;
 
-  const updateSize = () => {
+  const updateFactors = () => {
     const viewportHeight = window.innerHeight;
     const { height } = parentBlockEl.getBoundingClientRect();
     const domain = [
@@ -55,6 +55,11 @@ export default function App({ dataURL, startVH, endVH } = {}) {
     animation.goToAndStop(frame, true);
   };
 
+  const updateAll = () => {
+    updateFactors();
+    updateProgress();
+  };
+
   const rootElMounted = new Promise(resolve => {
     (function check() {
       const _parentBlockEl = rootEl.closest(".Block");
@@ -73,16 +78,15 @@ export default function App({ dataURL, startVH, endVH } = {}) {
   });
 
   Promise.all([rootElMounted, animationDataReady]).then(() => {
-    updateSize();
-    updateProgress();
+    const schedulerBasedUpdate = client =>
+      (client.hasChanged ? updateAll : updateProgress)();
 
-    window.addEventListener("resize", updateSize);
-    window.addEventListener("scroll", updateProgress);
+    window.__ODYSSEY__.scheduler.enqueue(updateAll);
+    window.__ODYSSEY__.scheduler.subscribe(schedulerBasedUpdate);
 
     if (module.hot) {
       module.hot.dispose(() => {
-        window.removeEventListener("resize", updateSize);
-        window.removeEventListener("scroll", updateFrame);
+        window.__ODYSSEY__.scheduler.unsubscribe(schedulerBasedUpdate);
       });
     }
   });
