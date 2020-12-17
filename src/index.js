@@ -6,8 +6,6 @@ import App from './components/App';
 
 const configs = [];
 
-const MARKER_NAME = 'scrubby';
-
 function render() {
   configs.forEach(({ rootEl, props }) => {
     rootEl.removeChild(rootEl.firstChild);
