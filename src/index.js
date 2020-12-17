@@ -1,7 +1,7 @@
 import './polyfills';
 import * as acto from '@abcnews/alternating-case-to-object';
 import { decode } from '@abcnews/base-36-props';
-import { getMountValue, isMount, selectMounts } from '@abcnews/mount-utils';
+import { getMountValue, selectMounts } from '@abcnews/mount-utils';
 import App from './components/App';
 
 const configs = [];
