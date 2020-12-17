@@ -18,6 +18,8 @@
 	},
 	"dependencies": {
 		"@abcnews/alternating-case-to-object": "^2.0.0",
+		"@abcnews/base-36-props": "^1.2.0",
+		"@abcnews/mount-utils": "^2.0.0",
 		"lottie-web": "^5.5.10",
 		"simple-linear-scale": "^1.0.1"
 	}
